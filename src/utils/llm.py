@@ -5,16 +5,12 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Configure OpenRouter client
 client = OpenAI(
     base_url="https://openrouter.ai/api/v1",
     api_key=os.getenv("OPENROUTER_API_KEY"),
 )
 
 def call_llm(system_prompt: str, user_prompt: str, model: str = None, json_mode: bool = False) -> str:
-    """
-    Calls the LLM via OpenRouter.
-    """
     if model is None:
         model = os.getenv("MODEL")
 
@@ -28,7 +24,7 @@ def call_llm(system_prompt: str, user_prompt: str, model: str = None, json_mode:
         "messages": messages,
         "temperature": 0.2,
         "extra_headers": {
-            "HTTP-Referer": "https://github.com/Manifold", # Optional, for OpenRouter rankings
+            "HTTP-Referer": "https://github.com/Manifold",
             "X-Title": "Manifold"
         }
     }
